@@ -9,27 +9,30 @@ services:
         volumes:
             - ./app:/app
         command: >
-            sh -c "python manage.py runserver 0.0.0.0:8000"
+            sh -c " python 
+                    python manage.py migrate &&
+                    python manage.py runserver 0.0.0.0:8000"
         env_file:
             - .env
         environment:
             - DB_HOST=${DB_HOST}
             - DB_NAME=${DB_NAME}
             - DB_USER=${DB_USER}
-            - DB_PASS=${DB_PASS}
+            - DB_PASS=${DB_ROOT_PASS}
+            - DB_PORT=${DB_OUTSIDE_PORT} 
         depends_on:
             - db
-
+        links: # Link to containers in another service.
+            - db:db
     db:
-        image: mysql-8.0.13
+        image: mysql:8.0.15
         env_file:
             - .env
+        restart: always
         ports:
-            - "3307:3306"
+            - ${DB_OUTSIDE_PORT}:${DB_PORT}
         environment:
-            - MYSQL_DATABASE=${DB_HOST}
-            - MYSQL_USER=${DB_USER}
-            - MYSQL_PASSWORD=${DB_PASS}
+            - MYSQL_DATABASE=${DB_NAME}
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
         volumes:
             - ./data:/docker-entrypoint-initdb.d
