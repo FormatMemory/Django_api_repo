@@ -1,6 +1,7 @@
-#My config
+#My config and files
 config/*.secret
 .env
+sandbox/
 # cache
 app/static/
 # vs code 
