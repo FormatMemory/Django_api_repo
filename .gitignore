@@ -1,6 +1,8 @@
 #My config
 config/*.secret
 .env
+# cache
+app/static/
 # vs code 
 *.vscode/*
 *.vscode/settings.json
