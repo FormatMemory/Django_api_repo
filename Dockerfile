@@ -4,6 +4,7 @@ MAINTAINER FormatMemory <davidthinkleding@gmail.com>
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
+COPY ./data ./data
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
         git \
         gcc \
