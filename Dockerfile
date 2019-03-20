@@ -14,7 +14,6 @@ RUN apk add --update --no-cache --virtual .tmp-build-deps \
         py-mysqldb \
         mariadb-dev \
         mariadb-client
-# RUN apk -q --no-cache add mariadb-client-libs
 RUN pip install --upgrade setuptools
 RUN pip install -r /requirements.txt
 RUN rm -rf .cache/pip
