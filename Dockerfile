@@ -19,7 +19,6 @@ RUN pip install --upgrade setuptools
 RUN pip install -r /requirements.txt
 RUN rm -rf .cache/pip
 RUN apk del .tmp-build-deps
-RUN python manage.py collectstatic --noinput
 
 RUN mkdir /app
 WORKDIR /app
