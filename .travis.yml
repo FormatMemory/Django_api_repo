@@ -6,7 +6,6 @@ services:
     - docker
 before_install:
     - mv .env.example .env
-    - docker-compose down
 before_script: 
     - pip install docker-compose
 script:
