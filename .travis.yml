@@ -7,7 +7,6 @@ services:
 before_install:
     - mv .env.example .env
     - docker-compose down
-    - service mysql stop
 before_script: 
     - pip install docker-compose
 script:
