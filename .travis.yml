@@ -5,7 +5,7 @@ python:
 services:
     - docker
 
-before_script: pip install docker-compose && touch .env
+before_script: pip install docker-compose && mv .env.example .env
 
 script:
     - docker-compose run app sh -c "python manage.py test && flake8"
