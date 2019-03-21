@@ -4,8 +4,11 @@ python:
 
 services:
     - docker
-
-before_script: pip install docker-compose && mv .env.example .env
-
+before_install:
+    - mv .env.example .env
+    - docker-compose down
+    - service mysql stop
+before_script: 
+    - pip install docker-compose
 script:
-    - docker-compose run app sh -c "python manage.py test && flake8"
+    - docker-compose run --rm app sh -c "python manage.py test && flake8"
