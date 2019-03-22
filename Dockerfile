@@ -15,21 +15,18 @@ RUN apk add --update --no-cache --virtual .tmp-build-deps \
         build-base \
         py-mysqldb \
         mariadb-dev \
-        mariadb-client \
-        tzdata
+        mariadb-client 
+        # tzdata
 RUN apk add ca-certificates && update-ca-certificates
+RUN apk add tzdata
 # Change TimeZone
-# RUN apk add --update tzdata
-ENV TZ=America/Los_Angeles
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-# Clean APK cache
+# ENV TZ=America/Los_Angeles
+ENV TZ=${TIME_ZONE}
+# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN pip install --upgrade setuptools
 RUN pip install -r /requirements.txt
 RUN rm -rf .cache/pip
-# RUN rm -rf /var/cache/apk/*
 RUN apk del .tmp-build-deps
-# RUN echo ${TIME_ZONE} > /etc/timezone
-# RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN mkdir /app
 WORKDIR /app
