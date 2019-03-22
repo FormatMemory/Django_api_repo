@@ -4,7 +4,6 @@ MAINTAINER FormatMemory <davidthinkleding@gmail.com>
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
-COPY ./data ./data
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
         git \
         gcc \
@@ -23,6 +22,7 @@ RUN apk del .tmp-build-deps
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
+COPY ./data ./data
 
 RUN adduser -D user
 USER user
