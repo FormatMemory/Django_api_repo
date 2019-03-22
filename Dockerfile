@@ -22,7 +22,8 @@ RUN apk del .tmp-build-deps
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
-COPY ./data ./data
+COPY ./mysql_data/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
+COPY ./mysql_data/mysql /var/lib/mysql
 
 RUN adduser -D user
 USER user

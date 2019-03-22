@@ -38,6 +38,7 @@ services:
             - MYSQL_DATABASE=${DB_NAME}
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
         volumes:
-            - ./data:/docker-entrypoint-initdb.d
-            - ./init.sql:/data/application/init.sql
-        command: --init-file /data/application/init.sql
+            - ./mysql_data/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+            # - ./mysql_data/init.sql:/data/application/init.sql
+            - ./mysql_data/mysql:/var/lib/mysql
+        # command: --init-file /data/application/init.sql

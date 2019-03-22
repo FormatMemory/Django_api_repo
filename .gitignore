@@ -2,6 +2,9 @@
 config/*.secret
 .env
 sandbox/
+mysql_data/mysql/
+# mysql_data/docker-entrypoint-initdb.d/
+
 # cache
 app/static/
 # vs code 
