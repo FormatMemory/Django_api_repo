@@ -23,6 +23,7 @@ services:
             - DB_PASS=${DB_ROOT_PASS}
             - DB_PORT=${DB_OUTSIDE_PORT} 
             - SECRET_KEY=${SECRET_KEY}
+            - TZ=${TIME_ZONE}
         depends_on:
             - db
         links: # Link to containers in another service.
@@ -37,6 +38,7 @@ services:
         environment:
             - MYSQL_DATABASE=${DB_NAME}
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+            - TZ=${TIME_ZONE}
         volumes:
             - ./mysql_data/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
             # - ./mysql_data/init.sql:/data/application/init.sql
