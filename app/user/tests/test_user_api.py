@@ -176,7 +176,7 @@ class PrivateUserAPITest(TestCase):
 
     def test_update_user_profile(self):
         """
-        Test uodating the user profile for authenticated user
+        Test updating the user profile for authenticated user
         """
         payload = {
             "name": "New Name",
@@ -189,3 +189,23 @@ class PrivateUserAPITest(TestCase):
         self.assertEqual(self.user.name, payload["name"])
         self.assertTrue(self.user.check_password(payload["password"]))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_email_cannot_change(self):
+        """
+        Test updating the user profile for authenticated user
+        while email cannot be changed
+        """
+        payload = {
+            "name": "New Name",
+            "password": "newPassword123@",
+            "email": "22@test.com"
+        }
+        res = self.client.patch(ME_URL, payload)
+
+        self.user.refresh_from_db()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, {
+            "name": payload["name"],
+            "email": self.user.email
+        })
+        self.assertTrue(self.user.check_password(payload["password"]))
