@@ -2,8 +2,10 @@
 config/*.secret
 .env
 sandbox/
+# ignore files in folder mysql
 mysql_data/mysql/*
-# mysql_data/docker-entrypoint-initdb.d/
+# but keep the folder
+!mysql_data/mysql/.keep
 
 # cache
 app/static/

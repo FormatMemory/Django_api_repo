@@ -3,7 +3,6 @@ MAINTAINER FormatMemory <davidthinkleding@gmail.com>
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /requirements.txt
 RUN apk update
 RUN apk upgrade
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
@@ -15,14 +14,18 @@ RUN apk add --update --no-cache --virtual .tmp-build-deps \
         build-base \
         py-mysqldb \
         mariadb-dev \
-        mariadb-client 
-        # tzdata
+        mariadb-client \
+        musl-dev \
+        zlib \
+        zlib-dev
+        
 RUN apk add ca-certificates && update-ca-certificates
-RUN apk add tzdata
+RUN apk add --update --no-cache tzdata jpeg-dev
 # Change TimeZone
 # ENV TZ=America/Los_Angeles
 ENV TZ=${TIME_ZONE}
 # RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+COPY ./requirements.txt /requirements.txt
 RUN pip install --upgrade setuptools
 RUN pip install -r /requirements.txt
 RUN rm -rf .cache/pip
@@ -34,7 +37,12 @@ COPY ./app /app
 COPY ./mysql_data/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 COPY ./mysql_data/mysql /var/lib/mysql
 
+RUN mkdir -p /vol/web/media
+RUN mkdir -p /vol/web/static
+
 RUN adduser -D user
+RUN chown -R user:user /vol/
+RUN chmod -R 755 /vol/web
 USER user
 
 EXPOSE 8000
