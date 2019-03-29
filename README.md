@@ -1,4 +1,5 @@
-# Django_api_repo
+# Django_api_repo [![Build Status](https://travis-ci.com/FormatMemory/Django_api_repo.svg?branch=master)](https://travis-ci.com/FormatMemory/Django_api_repo)
+
 Dive into _Django_
 
 
