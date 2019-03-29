@@ -24,7 +24,7 @@ from rest_framework_swagger.views import get_swagger_view
 schema_view = get_swagger_view(title='API Documant')
 
 urlpatterns = [
-    path('admin/', admin.site.urls), 
+    path('admin/', admin.site.urls),
     path('api/user/', include('user.urls')),
     path('api/recipe/', include('recipe.urls')),
     url(r'api/', schema_view),
