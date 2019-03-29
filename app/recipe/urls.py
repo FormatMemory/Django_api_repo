@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from recipe import views
 
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register('tags', views.TagViewSet)
 router.register('ingredients', views.IngredientViewSet)
 router.register('recipes', views.RecipeViewSet)

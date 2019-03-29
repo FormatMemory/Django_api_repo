@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
-        'PORT': os.environ.get('DB_OUTSIDE_PORT'),
+        'PORT': os.environ.get('DB_PORT'),
         'default-character-set': 'utf8',
     }
 }
